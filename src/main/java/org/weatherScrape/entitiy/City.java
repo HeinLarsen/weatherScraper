@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 public class City {
-
+// comment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
