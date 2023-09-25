@@ -12,7 +12,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         with:
-          node-version: '16' # Specify Node.js version 16
+          node-version: 'ref' # Specify Node.js version 16
 
       - name: Create Pull Request
         id: create_pr
@@ -22,4 +22,4 @@ jobs:
           branch: ${{ github.ref }}
           title: 'Create Pull Request'
           body: 'This pull request was automatically created when the "ready/" branch was pushed.'
-          node-version: '16' # Specify Node.js version 16 for this action as well
+          node-version: 'ref' # Specify Node.js version 16 for this action as well
