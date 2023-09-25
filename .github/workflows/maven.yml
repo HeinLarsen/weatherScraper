@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Get branch name from push event
         id: branch_name
-        run: echo "::set-output name=branch::$(echo $GITHUB_REF | awk -F/ '{print $3}')"
+        run: echo "::set-output name=branch::$(git rev-parse --abbrev-ref HEAD)"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
