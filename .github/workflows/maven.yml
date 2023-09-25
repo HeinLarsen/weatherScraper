@@ -8,7 +8,10 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Make sure you use Node.js 16 here if required.
+
       - name: create pull request
-        run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by GitHub action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
