@@ -17,6 +17,6 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: 'main'
           title: 'Create Pull Request'
           body: 'This pull request was automatically created when the "ready/" branch was pushed.'
