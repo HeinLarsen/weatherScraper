@@ -31,7 +31,7 @@ public class HibernateConfig {
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
             props.put("hibernate.archive.autodetection", "class"); // hibernate scans for annotated classes
             props.put("hibernate.current_session_context_class", "thread"); // hibernate current session context
-            props.put("hibernate.hbm2ddl.auto", "update"); // hibernate creates tables based on entities
+            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on entities
 
 
             return getEntityManagerFactory(configuration, props);
@@ -55,6 +55,12 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.City.class);
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.Day.class);
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.Forecast.class);
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.Night.class);
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.Region.class);
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.WeatherData.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig() {
