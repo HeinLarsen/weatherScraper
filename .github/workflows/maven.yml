@@ -9,10 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: develop
+        uses: actions/checkout@v4
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3.10.0
