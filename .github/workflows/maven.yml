@@ -2,7 +2,7 @@ name: Create Pull Request
 on:
   push:
     branches:
-      - 'ready/*'
+      - 'ready/*' # Define the branch pattern to trigger the workflow
 
 jobs:
   create_pull_request:
@@ -10,9 +10,7 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          node-version: 'ref' # Specify Node.js version 16
+        uses: actions/checkout@v4
 
       - name: Create Pull Request
         id: create_pr
@@ -22,4 +20,3 @@ jobs:
           branch: ${{ github.ref }}
           title: 'Create Pull Request'
           body: 'This pull request was automatically created when the "ready/" branch was pushed.'
-          node-version: 'ref' # Specify Node.js version 16 for this action as well
