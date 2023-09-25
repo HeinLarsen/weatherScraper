@@ -13,4 +13,4 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "2.0.0"
-          github_token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
