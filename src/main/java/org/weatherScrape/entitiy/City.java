@@ -1,9 +1,7 @@
 package org.weatherScrape.entitiy;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,21 +11,24 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 public class City {
-// comment
+
+    @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(unique = true, nullable = false)
     private String name;
 
     @ManyToOne
+    @ToString.Exclude
     private Region region;
 
     @OneToMany(mappedBy = "city")
+    @ToString.Exclude
     private Set<Forecast> forecasts = new HashSet<>();
 
-    public City(String name) {
+    public City(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

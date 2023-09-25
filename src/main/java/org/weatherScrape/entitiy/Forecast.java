@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -18,17 +19,14 @@ public class Forecast {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private LocalDateTime date;
-
     @ManyToOne
     private City city;
 
     @Column(nullable = false)
-    private LocalDateTime sunrise;
+    private LocalTime sunrise;
 
     @Column(nullable = false)
-    private LocalDateTime sunset;
+    private LocalTime sunset;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Day day;
@@ -36,7 +34,31 @@ public class Forecast {
     @OneToOne(cascade = CascadeType.ALL)
     private Night night;
 
-    public Forecast(LocalDateTime date) {
-        this.date = date;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+
+    public Forecast(LocalTime sunrise, LocalTime sunset) {
+        this.sunrise = sunrise;
+        this.sunset = sunset;
     }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
+    }
+
+    public void setNight(Night night) {
+        this.night = night;
+    }
+
+    @PrePersist
+    void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
 }

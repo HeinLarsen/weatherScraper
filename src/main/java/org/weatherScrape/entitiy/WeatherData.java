@@ -32,7 +32,7 @@ public class WeatherData {
     private int thunderProbability;
 
     @Column(nullable = false)
-    private int precipitation;
+    private double precipitation;
 
     @Column(nullable = false)
     private int precipitationProbability;
@@ -40,7 +40,7 @@ public class WeatherData {
     @Column(nullable = false)
     private String statement;
 
-    public WeatherData(int temperature, int cloudCover, int windGust, int windSpeed, String windDirection, int thunderProbability, int precipitation, int precipitationProbability, String statement) {
+    public WeatherData(int temperature, int cloudCover, int windGust, int windSpeed, String windDirection, int thunderProbability, double precipitation, int precipitationProbability, String statement) {
         this.temperature = temperature;
         this.cloudCover = cloudCover;
         this.windGust = windGust;

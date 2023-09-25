@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Night extends WeatherData {
 
-    public Night(int temperature, int cloudCover, int windGust, int windSpeed, String windDirection, int thunderProbability, int precipitation, int precipitationProbability, String statement) {
+    public Night(int temperature, int cloudCover, int windGust, int windSpeed, String windDirection, int thunderProbability, double precipitation, int precipitationProbability, String statement) {
         super(temperature, cloudCover, windGust, windSpeed, windDirection, thunderProbability, precipitation, precipitationProbability, statement);
     }
 }
