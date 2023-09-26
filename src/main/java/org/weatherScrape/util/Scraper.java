@@ -89,19 +89,19 @@ public class Scraper {
         ExecutorService es = Executors.newCachedThreadPool();
 
         for (City city : cities) {
-            List<Forecast> cityForecasts = new ArrayList<>();
             Future<List<Forecast>> forecastFutures = es.submit(
                     () -> {
+                        List<Forecast> cityForecasts = new ArrayList<>();
                         Document doc = fetchData(baseUrl + city.getRegion().getCountryCode() + "/" + city.getName() + "/" + city.getId() + "/current-weather/" + city.getId());
 
                         // sunrise
                         Element sunriseAndSunset = doc.getElementsByClass("sunrise-sunset").first();
                         String sunriseStr = sunriseAndSunset.select("div > div.panel.right > div:nth-child(2) > span.text-value").text();
                         LocalTime sunrise = Helpers.getLocalTime(sunriseStr);
+
                         // sunset
                         String sunsetStr = sunriseAndSunset.select("div > div.panel.left > div:nth-child(2) > span.text-value").text();
                         LocalTime sunset = Helpers.getLocalTime(sunsetStr);
-
                         Forecast forecast = new Forecast(sunrise, sunset);
                         Elements aForecasts = doc.getElementsByClass("half-day-card");
 
