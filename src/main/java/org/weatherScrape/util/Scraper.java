@@ -83,14 +83,15 @@ public class Scraper {
     }
 
     public static List<Forecast> getForecasts(List<City> cities, String baseUrl) {
+        System.out.println(cities.size());
         List<Forecast> forecasts = new ArrayList<>();
 
         ExecutorService es = Executors.newCachedThreadPool();
 
         for (City city : cities) {
+            List<Forecast> cityForecasts = new ArrayList<>();
             Future<List<Forecast>> forecastFutures = es.submit(
                     () -> {
-                        List<Forecast> cityForecasts = new ArrayList<>();
                         Document doc = fetchData(baseUrl + city.getRegion().getCountryCode() + "/" + city.getName() + "/" + city.getId() + "/current-weather/" + city.getId());
 
                         // sunrise
@@ -103,10 +104,11 @@ public class Scraper {
 
                         Forecast forecast = new Forecast(sunrise, sunset);
                         Elements aForecasts = doc.getElementsByClass("half-day-card");
-                        for (Element aForecast : aForecasts) {
 
-                            Elements panels = aForecast.select("div.half-day-card-content > div.panels > div.left");
-                            panels.addAll(aForecast.select("div.half-day-card-content > div.panels > div.right"));
+
+                        for (Element aForecast : aForecasts) {
+                            Elements panels = aForecast.select("div.half-day-card-content > div.panels > div.left > .panel-item");
+                            panels.addAll(aForecast.select("div.half-day-card-content > div.panels > div.right > .panel-item"));
 
                             String statement = aForecast.getElementsByClass("phrase").first().text();
 
@@ -120,33 +122,35 @@ public class Scraper {
                             int cloudCoverInt = 0;
 
                             for (Element panel : panels) {
-                                switch (panel.text()) {
+                                switch (panel.ownText()) {
                                     case "Wind":
-                                        String wind = aForecast.select("span").text();
+                                        String wind = panel.select("span").text();
                                         windDirection = wind.split(" ")[0];
                                         windSpeed = Integer.parseInt(wind.split(" ")[1]);
                                         break;
                                     case "Gusts":
-                                        windGust = Integer.parseInt(aForecast.select("span").text().split(" ")[0]);
+                                        windGust = Integer.parseInt(panel.select("span").text().split(" ")[0]);
                                         break;
                                     case "Thunderstorms":
-                                        String thunderProbability = aForecast.select("span").text();
+                                        String thunderProbability = panel.select("span").text();
                                         thunder = Integer.parseInt(Helpers.charVanish(thunderProbability, "%"));
                                         break;
                                     case "Precipitation":
-                                        String precipitation = aForecast.select("span").text();
+                                        String precipitation = panel.select("span").text();
                                         precipitationDouble = Double.parseDouble(Helpers.charVanish(precipitation, "mm"));
                                         break;
                                     case "Probability of Precipitation":
-                                        String precipitationProbability = aForecast.select("span").text();
+                                        String precipitationProbability = panel.select("span").text();
                                         precipitationInt = Integer.parseInt(Helpers.charVanish(precipitationProbability, "%"));
                                         break;
                                     case "Max UV Index":
-                                        String uv = aForecast.select("span").text();
+                                        String uv = panel.select("span").text();
                                         uvIndex = Integer.parseInt(uv.split(" ")[0]);
+                                        break;
                                     case "Cloud Cover":
-                                        String cloudCover = aForecast.select("span").text();
+                                        String cloudCover = panel.select("span").text();
                                         cloudCoverInt = Integer.parseInt(Helpers.charVanish(cloudCover, "%"));
+                                        break;
                                     default:
                                         break;
                                 }
@@ -163,6 +167,7 @@ public class Scraper {
                                 Night night = new Night(temperature, cloudCoverInt, windGust, windSpeed, windDirection, thunder, precipitationDouble, precipitationInt, statement);
                                 forecast.setNight(night);
                             }
+                            forecast.setCity(city);
                             cityForecasts.add(forecast);
                         }
                         return cityForecasts;
@@ -173,6 +178,7 @@ public class Scraper {
                 e.printStackTrace();
             }
         }
+        System.out.println(forecasts.size());
             es.shutdown();
             return forecasts;
         }

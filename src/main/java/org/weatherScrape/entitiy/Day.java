@@ -7,7 +7,6 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@ToString
 @NoArgsConstructor
 public class Day extends WeatherData {
 
@@ -18,4 +17,10 @@ public class Day extends WeatherData {
         this.uvIndex = uvIndex;
     }
 
+    @Override
+    public String toString() {
+        return "Day{" +
+                "uvIndex=" + uvIndex +
+                '}' + super.toString();
+    }
 }

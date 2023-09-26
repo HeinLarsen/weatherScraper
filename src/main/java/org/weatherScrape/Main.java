@@ -21,6 +21,7 @@ public class Main {
         var forecasts = Scraper.getForecasts(cities, "https://www.accuweather.com/en/");
 
         forecasts.forEach(System.out::println);
+        System.out.println(forecasts.size());
 
 
     }
