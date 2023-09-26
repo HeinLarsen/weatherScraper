@@ -61,4 +61,8 @@ public class Forecast {
         createdAt = LocalDateTime.now();
     }
 
+
+    public double getHighestPrecipitation() {
+        return Math.max(day.getPrecipitation(), night.getPrecipitation());
+    }
 }
