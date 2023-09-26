@@ -65,4 +65,25 @@ public class Forecast {
     public double getHighestPrecipitation() {
         return Math.max(day.getPrecipitation(), night.getPrecipitation());
     }
+
+    public int getHighestTemperature() {
+        return Math.max(day.getTemperature(), night.getTemperature());
+    }
+
+    public int getHighestCloudCover() {
+        return Math.max(day.getCloudCover(), night.getCloudCover());
+    }
+
+    public int getWindSpeedForDayAndNight() {
+        return day.getWindSpeed() + night.getWindSpeed();
+    }
+
+    public int getThunderProbabilityForDayAndNight() {
+        return day.getThunderProbability() + night.getThunderProbability();
+    }
+
+    public int getHighestPrecipitationProbability() {
+        return Math.max(day.getPrecipitationProbability(), night.getPrecipitationProbability());
+    }
+
 }
