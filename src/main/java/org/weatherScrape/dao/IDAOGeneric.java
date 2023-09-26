@@ -13,5 +13,7 @@ public interface IDAOGeneric<T> {
 
         List<T> getAll();
 
+        void saveAll(List<T> list);
+
         void setEntityManagerFactory(EntityManagerFactory factory);
 }

@@ -16,7 +16,7 @@ public class City {
     @Id
     private int id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)

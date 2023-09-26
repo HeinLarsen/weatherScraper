@@ -19,7 +19,7 @@ public class Forecast {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private City city;
 
     @Column(nullable = false)

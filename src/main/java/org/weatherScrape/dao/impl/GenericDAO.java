@@ -44,6 +44,17 @@ public class GenericDAO<T> implements IDAOGeneric<T> {
     }
 
     @Override
+    public void saveAll(List<T> list) {
+        try (var em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            for (T entity : list) {
+                em.persist(entity);
+            }
+            em.getTransaction().commit();
+        }
+    }
+
+    @Override
     public void setEntityManagerFactory(EntityManagerFactory factory) {
         emf = factory;
     }
