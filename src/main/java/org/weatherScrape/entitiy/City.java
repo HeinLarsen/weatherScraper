@@ -19,11 +19,11 @@ public class City {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     private Region region;
 
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Forecast> forecasts = new HashSet<>();
 
