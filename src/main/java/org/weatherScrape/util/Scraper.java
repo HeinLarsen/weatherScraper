@@ -168,8 +168,8 @@ public class Scraper {
                                 forecast.setNight(night);
                             }
                             forecast.setCity(city);
-                            cityForecasts.add(forecast);
                         }
+                        cityForecasts.add(forecast);
                         return cityForecasts;
                     });
             try {

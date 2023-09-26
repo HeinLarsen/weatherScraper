@@ -15,6 +15,6 @@ public class Night extends WeatherData {
 
     @Override
     public String toString() {
-        return "Night{} " + super.toString();
+        return "Night{ " + super.toString() + " }";
     }
 }

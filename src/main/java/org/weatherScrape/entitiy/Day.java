@@ -20,7 +20,7 @@ public class Day extends WeatherData {
     @Override
     public String toString() {
         return "Day{" +
-                "uvIndex=" + uvIndex +
-                '}' + super.toString();
+                "uvIndex=" + uvIndex + super.toString() +
+                '}';
     }
 }
