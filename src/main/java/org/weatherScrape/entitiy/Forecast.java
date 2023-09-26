@@ -34,7 +34,6 @@ public class Forecast {
     @OneToOne(cascade = CascadeType.ALL)
     private Night night;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 

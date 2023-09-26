@@ -7,9 +7,9 @@ import org.weatherScrape.util.Scraper;
 
 public class Main {
     public static void main(String[] args) {
-//        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-
+/*
         Document doc = Scraper.fetchData("https://www.accuweather.com/en/browse-locations/eur/dk");
 
         var regions = Scraper.getRegions(doc);
@@ -21,7 +21,7 @@ public class Main {
         var forecasts = Scraper.getForecasts(cities, "https://www.accuweather.com/en/");
 
         forecasts.forEach(System.out::println);
-        System.out.println(forecasts.size());
+        System.out.println(forecasts.size());*/
 
 
     }
