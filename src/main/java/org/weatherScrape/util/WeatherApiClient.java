@@ -1,6 +1,9 @@
 package org.weatherScrape.util;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -32,15 +35,17 @@ public class WeatherApiClient {
         String apiKey = "a4e9445f16deb18de54bee308714ee5c";
         String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&APPID=" + apiKey;
 
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+        String jsonresp = response.body();
 
-        return response.body();
+        return jsonresp;
     }
+
 
 }

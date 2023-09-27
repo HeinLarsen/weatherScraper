@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 
 
 @Entity
@@ -35,17 +36,18 @@ public class CurrentWeather {
     private String description;
 
     @Column(nullable = false)
-    public LocalTime sunrise;
+    private Date sunrise;
 
     @Column(nullable = false)
-    public LocalTime sunset;
+    private Date sunset;
 
 
     @Column(nullable = false)
-    public LocalDateTime dt;
+    private Date dt;
 
-    public CurrentWeather(LocalTime sunrise, LocalTime sunset) {
+    public CurrentWeather(Date sunrise, Date sunset, Date dt) {
         this.sunrise = sunrise;
         this.sunset = sunset;
+        this.dt = dt;
     }
 }
