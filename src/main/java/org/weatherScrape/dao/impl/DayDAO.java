@@ -8,6 +8,7 @@ public class DayDAO extends GenericDAO<Day>{
     private static DayDAO instance;
 
     private DayDAO(EntityManagerFactory emf) {
+        super(Day.class);
         super.setEntityManagerFactory(emf);
     }
 

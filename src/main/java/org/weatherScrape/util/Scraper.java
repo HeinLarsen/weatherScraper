@@ -33,7 +33,7 @@ public class Scraper {
     public static List<Region> getRegions(Document doc) {
         List<Region> regions = new ArrayList<>();
         // tmp hardcode to Capital Region of Denmark
-        Elements elements = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a");
+        Elements elements = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a:nth-child(1)");
         Elements country = doc.getElementsByClass("location-title");
 
 

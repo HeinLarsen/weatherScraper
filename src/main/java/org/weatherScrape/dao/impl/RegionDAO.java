@@ -12,6 +12,7 @@ public class RegionDAO extends GenericDAO<Region> implements IRegionDAO {
     private static RegionDAO instance;
 
     private RegionDAO(EntityManagerFactory emf) {
+        super(Region.class);
         super.setEntityManagerFactory(emf);
     }
 

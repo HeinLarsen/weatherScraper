@@ -3,15 +3,10 @@ package org.weatherScrape;
 import jakarta.persistence.EntityManagerFactory;
 import org.jsoup.nodes.Document;
 import org.weatherScrape.config.HibernateConfig;
-import org.weatherScrape.dao.impl.CityDAO;
 import org.weatherScrape.dao.impl.ForecastDAO;
-import org.weatherScrape.dao.impl.GenericDAO;
-import org.weatherScrape.dao.impl.RegionDAO;
 import org.weatherScrape.entitiy.*;
 import org.weatherScrape.util.Scraper;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -26,6 +21,8 @@ public class Main {
 
 
         forecastDAO.saveAll(forecasts);
+
+        forecastDAO.getById(1);
 
 
 

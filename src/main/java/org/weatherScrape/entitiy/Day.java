@@ -1,6 +1,6 @@
 package org.weatherScrape.entitiy;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -8,6 +8,11 @@ import lombok.ToString;
 @Entity
 @Getter
 @NoArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "Day.deleteAllDays", query = "DELETE FROM Day d")
+
+})
+
 public class Day extends WeatherData {
 
     private int uvIndex;

@@ -8,6 +8,7 @@ public class ForecastDAO extends GenericDAO<Forecast> {
     private static ForecastDAO instance;
 
     private ForecastDAO(EntityManagerFactory emf) {
+        super(Forecast.class);
         super.setEntityManagerFactory(emf);
     }
 

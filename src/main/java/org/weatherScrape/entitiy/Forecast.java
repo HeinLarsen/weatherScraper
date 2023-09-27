@@ -13,6 +13,9 @@ import java.time.LocalTime;
 @Getter
 @ToString
 @NoArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "Forecast.deleteAllForecasts", query = "DELETE FROM Forecast f")
+})
 public class Forecast {
 
     @Id

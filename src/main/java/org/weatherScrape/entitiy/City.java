@@ -1,6 +1,7 @@
 package org.weatherScrape.entitiy;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
 
 import java.util.HashSet;
@@ -10,6 +11,9 @@ import java.util.Set;
 @Getter
 @ToString
 @NoArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "City.deleteAllCities", query = "DELETE FROM City c")
+})
 public class City {
 
     @Setter(AccessLevel.NONE)
@@ -35,4 +39,6 @@ public class City {
     public void setRegion(Region region) {
         this.region = region;
     }
+
+
 }
