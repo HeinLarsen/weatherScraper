@@ -1,5 +1,7 @@
 package org.weatherScrape.DTO;
+import lombok.*;
 
+@Getter
 public class CurrentWeatherDTO {
 
     private String date;
@@ -28,47 +30,5 @@ public class CurrentWeatherDTO {
         this.uvIndex = uvIndex;
     }
 
-    public String getDate() {
-        return date;
-    }
 
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public int getCloudCover() {
-        return cloudCover;
-    }
-
-    public int getWindGust() {
-        return windGust;
-    }
-
-    public int getWindSpeed() {
-        return windSpeed;
-    }
-
-    public String getWindDirection() {
-        return windDirection;
-    }
-
-    public int getThunderProbability() {
-        return thunderProbability;
-    }
-
-    public int getPrecipitation() {
-        return precipitation;
-    }
-
-    public int getPrecipitationProbability() {
-        return precipitationProbability;
-    }
-
-    public String getStatement() {
-        return statement;
-    }
-
-    public int getUvIndex() {
-        return uvIndex;
-    }
 }

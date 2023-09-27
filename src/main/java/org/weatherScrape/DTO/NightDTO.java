@@ -1,5 +1,7 @@
 package org.weatherScrape.DTO;
+import lombok.*;
 
+@Getter
 public class NightDTO {
 
     private int temperature;
@@ -26,40 +28,6 @@ public class NightDTO {
 
     }
 
-    public int getTemperature() {
-        return temperature;
-    }
 
-    public int getCloudCover() {
-        return cloudCover;
-    }
-
-    public int getWindGust() {
-        return windGust;
-    }
-
-    public int getWindSpeed() {
-        return windSpeed;
-    }
-
-    public String getWindDirection() {
-        return windDirection;
-    }
-
-    public int getThunderProbability() {
-        return thunderProbability;
-    }
-
-    public int getPrecipitation() {
-        return precipitation;
-    }
-
-    public int getPrecipitationProbability() {
-        return precipitationProbability;
-    }
-
-    public String getStatement() {
-        return statement;
-    }
 
 }
