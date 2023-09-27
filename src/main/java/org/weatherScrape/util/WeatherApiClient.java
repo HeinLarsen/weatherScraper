@@ -15,7 +15,7 @@ public class WeatherApiClient {
 
     public static String getWeatherDataNow() throws IOException, InterruptedException {
         HttpRequest getRequest = HttpRequest.newBuilder()
-                .uri(URI.create("http://api.openweathermap.org/data/2.5/weather?q=Copenhagen,dk&APPID=(API KEY)"))
+                .uri(URI.create("http://api.openweathermap.org/data/2.5/weather?q=Skagen,dk&APPID=a4e9445f16deb18de54bee308714ee5c"))
                 .build();
 
         HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
@@ -27,4 +27,5 @@ public class WeatherApiClient {
 
         return null;
     }
+
 }
