@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,22 +36,11 @@ public class Main {
         Gson gson = new Gson();
         try{
             String response = WeatherApiClient.getWeatherDateNow("Copenhagen");
-            JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
-            JsonObject sysObject = jsonObject.getAsJsonObject("sys");
-          JsonElement sunrise = sysObject.get("sunrise");
-          JsonElement sunset = sysObject.get("sunset");
-          JsonElement dt = jsonObject.get("dt");
-            System.out.println(dt);
-            System.out.println(sunrise);
-            System.out.println(sunset);
-            Date date = new Date(sunrise.getAsLong() * 1000L);
-            Date date1 = new Date(sunset.getAsLong() * 1000L);
-            Date date2 = new Date(dt.getAsLong() * 1000L);
-            System.out.println("date for weather " + date2);
-            System.out.println(" sunrise : " + date);
-            System.out.println(" sunset : " + date1);
+            List<Date> dates = WeatherApiClient.convertJSONRespToDates(response);
 
-            CurrentWeather currentWeather = new CurrentWeather(date, date1, date2);
+            System.out.println(dates);
+
+
 
 
 
