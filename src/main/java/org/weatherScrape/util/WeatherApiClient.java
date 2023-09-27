@@ -13,6 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -47,9 +48,9 @@ public class WeatherApiClient {
         JsonElement sunrise = sysObject.get("sunrise");
         JsonElement sunset = sysObject.get("sunset");
         JsonElement dt = gson.fromJson(jsonresp, JsonObject.class).get("dt");
-        LocalDate date = new Date(sunrise.getAsLong() * 1000L).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-        LocalDate date1 = new Date(sunset.getAsLong() * 1000L).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-        LocalDate date2 = new Date(dt.getAsLong() * 1000L).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+        LocalDateTime date = LocalDateTime.ofInstant(new Date(sunrise.getAsLong() * 1000).toInstant(), ZoneId.systemDefault());
+        LocalDateTime date1 = LocalDateTime.ofInstant(new Date(sunset.getAsLong() * 1000).toInstant(), ZoneId.systemDefault());
+        LocalDateTime date2 = LocalDateTime.ofInstant(new Date(dt.getAsLong() * 1000).toInstant(), ZoneId.systemDefault());
         currentweather.setSunrise(date);
         currentweather.setSunset(date1);
         currentweather.setForecastDate(date2);

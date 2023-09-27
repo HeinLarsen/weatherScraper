@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -38,19 +37,19 @@ public class CurrentWeather {
     @Column(nullable = false)
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private LocalDate sunrise;
+    private LocalDateTime sunrise;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private LocalDate sunset;
+    private LocalDateTime sunset;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private LocalDate forecastDate;
+    private LocalDateTime forecastDate;
 
-    public CurrentWeather(LocalDate sunrise, LocalDate sunset, LocalDate forecastDate) {
+    public CurrentWeather(LocalDateTime sunrise, LocalDateTime sunset, LocalDateTime forecastDate) {
         this.sunrise = sunrise;
         this.sunset = sunset;
         this.forecastDate = forecastDate;
@@ -84,15 +83,16 @@ public class CurrentWeather {
         this.description = description;
     }
 
-    public void setSunrise(LocalDate sunrise) {
+    public void setSunrise(LocalDateTime sunrise) {
         this.sunrise = sunrise;
     }
 
-    public void setSunset(LocalDate sunset) {
+    public void setSunset(LocalDateTime sunset) {
         this.sunset = sunset;
     }
 
-    public void setForecastDate(LocalDate forecastDate) {
+
+    public void setForecastDate(LocalDateTime forecastDate) {
         this.forecastDate = forecastDate;
     }
 }
