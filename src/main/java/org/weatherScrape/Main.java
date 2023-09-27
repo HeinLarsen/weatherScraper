@@ -1,8 +1,10 @@
 package org.weatherScrape;
 
+import com.google.gson.Gson;
 import jakarta.persistence.EntityManagerFactory;
 import org.jsoup.nodes.Document;
 import org.weatherScrape.config.HibernateConfig;
+import org.weatherScrape.entitiy.CurrentWeather;
 import org.weatherScrape.util.Scraper;
 import org.weatherScrape.util.WeatherApiClient;
 
@@ -23,11 +25,17 @@ public class Main {
 
         forecasts.forEach(System.out::println);*/
 
-        try {
-            WeatherApiClient.getWeatherDataNow();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       try {
+           Gson gson = new Gson();
+           WeatherApiClient.getWeatherDateNow("Helsinge");
+           CurrentWeather currentWeather = gson.fromJson(WeatherApiClient.getWeatherDateNow("Helsinge"), CurrentWeather.class);
+              System.out.println(currentWeather.getName());
+
+         } catch (Exception e) {
+           e.printStackTrace();
+
+
+       }
 
 
     }

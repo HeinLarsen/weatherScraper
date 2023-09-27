@@ -35,14 +35,14 @@ public class CurrentWeather {
     private String description;
 
     @Column(nullable = false)
-    private LocalTime sunrise;
+    public LocalTime sunrise;
 
     @Column(nullable = false)
-    private LocalTime sunset;
+    public LocalTime sunset;
 
-    @Temporal(TemporalType.DATE)
+
     @Column(nullable = false)
-    private LocalDateTime dt;
+    public LocalDateTime dt;
 
     public CurrentWeather(LocalTime sunrise, LocalTime sunset) {
         this.sunrise = sunrise;

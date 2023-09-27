@@ -13,7 +13,7 @@ public class WeatherApiClient {
 
 
 
-    public static String getWeatherDataNow() throws IOException, InterruptedException {
+   /* public static String getWeatherDataNow() throws IOException, InterruptedException {
         HttpRequest getRequest = HttpRequest.newBuilder()
                 .uri(URI.create("http://api.openweathermap.org/data/2.5/weather?q=Skagen,dk&APPID=a4e9445f16deb18de54bee308714ee5c"))
                 .build();
@@ -26,6 +26,21 @@ public class WeatherApiClient {
 
 
         return null;
+    }*/
+
+    public static String getWeatherDateNow(String cityName) throws IOException, InterruptedException {
+        String apiKey = "a4e9445f16deb18de54bee308714ee5c";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&APPID=" + apiKey;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+
+        return response.body();
     }
 
 }
