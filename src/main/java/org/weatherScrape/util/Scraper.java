@@ -9,12 +9,12 @@ import org.weatherScrape.helper.Helpers;
 
 import java.io.IOException;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Scraper {
     public static Document fetchData(String _url) {
@@ -33,10 +33,10 @@ public class Scraper {
     public static List<Region> getRegions(Document doc) {
         List<Region> regions = new ArrayList<>();
         // tmp hardcode to Capital Region of Denmark
-        Elements elements = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a:nth-child(1)");
+        Elements elements = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a");
         Elements country = doc.getElementsByClass("location-title");
 
-        System.out.println(elements);
+
 
         for (Element element : elements) {
             String name = element.text();
@@ -51,13 +51,15 @@ public class Scraper {
     }
 
     public static List<City> getCities(List<Region> regions, String baseUrl) {
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        ExecutorService es = Executors.newFixedThreadPool(availableProcessors);
         List<City> cities = new ArrayList<>();
-
-        ExecutorService es = Executors.newCachedThreadPool();
-
+        AtomicLong scrapeTime = new AtomicLong();
         for (Region region : regions) {
             Future<List<City>> cityFutures = es.submit(
                     () -> {
+                        long startTime = System.nanoTime();
+                        System.out.println("Fetching cities for " + region.getName() + " on thread " + Thread.currentThread().getName());
                         List<City> regionCities = new ArrayList<>();
                         Document doc = fetchData(baseUrl + region.getCountryCode() + "/" + region.getId());
                         Elements aCities = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a");
@@ -69,6 +71,10 @@ public class Scraper {
                             city.setRegion(region);
                             regionCities.add(city);
                         }
+                        long endTime = System.nanoTime();
+                        long duration = (endTime - startTime);
+                        scrapeTime.addAndGet(duration);
+                        System.out.println("Finished fetching cities for " + region.getName() + " on thread " + Thread.currentThread().getName() + " in " + duration/1000000 + " milliseconds");
                         return regionCities;
                     }
             );
@@ -79,18 +85,25 @@ public class Scraper {
             }
         }
         es.shutdown();
+        System.out.println("Total scrape time: " + scrapeTime.get()/1000000 + " milliseconds");
+        // Might be needed because there's two Ågerup on the website?
+        // cities.removeIf(city -> cities.stream().anyMatch(c -> c.getName().equals(city.getName()) && c.getId() != city.getId()));
         return cities;
     }
 
     public static List<Forecast> getForecasts(List<City> cities, String baseUrl) {
-        System.out.println(cities.size());
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        ExecutorService es = Executors.newFixedThreadPool(availableProcessors);
+        
         List<Forecast> forecasts = new ArrayList<>();
-
-        ExecutorService es = Executors.newCachedThreadPool();
-
+        AtomicLong scrapeTime = new AtomicLong();
         for (City city : cities) {
             Future<List<Forecast>> forecastFutures = es.submit(
                     () -> {
+                        long startTime = System.nanoTime();
+
+                        System.out.println("Fetching forecasts for " + city.getName() + " on thread " + Thread.currentThread().getName());
+
                         List<Forecast> cityForecasts = new ArrayList<>();
                         Document doc = fetchData(baseUrl + city.getRegion().getCountryCode() + "/" + city.getName() + "/" + city.getId() + "/current-weather/" + city.getId());
 
@@ -170,6 +183,10 @@ public class Scraper {
                             forecast.setCity(city);
                         }
                         cityForecasts.add(forecast);
+                        long endTime = System.nanoTime();
+                        long duration = (endTime - startTime);
+                        scrapeTime.addAndGet(duration);
+                        System.out.println("Finished fetching forecasts for " + city.getName() + " on thread " + Thread.currentThread().getName() + " in " + duration/1000000 + " milliseconds" );
                         return cityForecasts;
                     });
             try {
@@ -178,9 +195,10 @@ public class Scraper {
                 e.printStackTrace();
             }
         }
-        System.out.println(forecasts.size());
             es.shutdown();
-            return forecasts;
+            System.out.println("Total scrape time: " + scrapeTime.get()/1000000 + " milliseconds");
+
+        return forecasts;
         }
 
 }
