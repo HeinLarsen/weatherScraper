@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
 
      /*   Document doc = Scraper.fetchData("https://www.accuweather.com/en/browse-locations/eur/dk");
@@ -33,23 +33,15 @@ public class Main {
 
         forecasts.forEach(System.out::println);*/
 
-        Gson gson = new Gson();
-        try{
-            String response = WeatherApiClient.getWeatherDateNow("Copenhagen");
-            List<Date> dates = WeatherApiClient.convertJSONRespToDates(response);
-
-            System.out.println(dates);
-
-
+      /*  try {
+            CurrentWeather currentWeather = WeatherApiClient.getWeatherDateNow("Copenhagen");
+            System.out.println(currentWeather.toString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }*/
 
 
 
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
 
     }
