@@ -4,6 +4,7 @@ import config.HibernateTestConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.weatherScrape.entitiy.City;
@@ -15,8 +16,11 @@ class CityDAOTest {
     private static EntityManager em;
     private static CityDAO dao;
 
-    @BeforeAll
-    static void setUpAll() {
+
+
+
+    @BeforeEach
+    void setUpEach() {
         emf = HibernateTestConfig.getEntityManagerFactoryConfig();
         em = emf.createEntityManager();
         dao = CityDAO.getInstance(emf);
@@ -73,6 +77,6 @@ class CityDAOTest {
         dao.saveAll(list);
 
         var res = dao.getAll();
-        assertEquals(5, res.size());
+        assertEquals(4, res.size());
     }
 }
