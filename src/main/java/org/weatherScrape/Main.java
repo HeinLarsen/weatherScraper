@@ -23,7 +23,6 @@ public class Main {
 
 
         var forecasts = scrape();
-        forecasts.forEach(System.out::println);
 
 
         forecastDAO.saveAll(forecasts);
