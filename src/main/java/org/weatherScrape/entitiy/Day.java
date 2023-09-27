@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @NamedQueries({
-        @NamedQuery(name = "Day.deleteAllDays", query = "DELETE FROM Day d"),
+        @NamedQuery(name = "Day.deleteAllDays", query = "DELETE FROM Day d")
 
 })
 
