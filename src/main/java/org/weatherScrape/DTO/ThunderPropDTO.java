@@ -5,10 +5,10 @@ import org.weatherScrape.entitiy.Forecast;
 @Getter
 public class ThunderPropDTO {
 
-    public Forecast forecast;
+    private int thunderProp;
 
     public ThunderPropDTO(Forecast forecast) {
-        this.forecast = forecast;
+        this.thunderProp = forecast.getThunderProbabilityForDayAndNight();
     }
 
 

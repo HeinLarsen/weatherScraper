@@ -1,22 +1,19 @@
 package org.weatherScrape.DTO;
 
+import lombok.Getter;
 import org.weatherScrape.entitiy.Forecast;
 
+@Getter
 public class HighestPrecipitationDTO {
 
-    private Forecast forecast;
-
-
+    private double highestPrecipitation;
 
 
 
     public HighestPrecipitationDTO(Forecast forecast) {
-        this.forecast = forecast;
+        this.highestPrecipitation = forecast.getHighestPrecipitation();
     }
 
-    public double getHighestPrecipitation() {
-        return forecast.getHighestPrecipitation();
-    }
 
 
 

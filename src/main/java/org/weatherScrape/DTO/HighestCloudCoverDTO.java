@@ -1,16 +1,16 @@
 package org.weatherScrape.DTO;
 
+import lombok.Getter;
 import org.weatherScrape.entitiy.Forecast;
 
+@Getter
 public class HighestCloudCoverDTO {
 
-    private Forecast forecast;
+    private int highestCloudCover;
 
     public HighestCloudCoverDTO(Forecast forecast) {
-        this.forecast = forecast;
+        this.highestCloudCover = forecast.getHighestCloudCover();
     }
 
-    public int getHighestCloudCover() {
-        return forecast.getHighestCloudCover();
-    }
+
 }
