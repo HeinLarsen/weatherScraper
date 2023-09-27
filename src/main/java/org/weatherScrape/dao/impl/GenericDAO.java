@@ -9,36 +9,32 @@ public class GenericDAO<T> implements IDAOGeneric<T> {
 
     protected static EntityManagerFactory emf;
 
+    private final Class<T> entityClass; // Add this field
+    public GenericDAO(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
     @Override
-    public void save(T entity) {
+    public T save(T entity) {
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(entity);
-            em.getTransaction().commit();
-        }
-    }
-
-    @Override
-    public T getById(int id) {
-        try (var em = emf.createEntityManager()) {
-            return em.find((Class<T>) this.getClass(), id);
-        }
-    }
-
-    @Override
-    public T update(T entity) {
-        try (var em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.merge(entity);
             em.getTransaction().commit();
             return entity;
         }
     }
 
     @Override
+    public T getById(int id) {
+        try (var em = emf.createEntityManager()) {
+            return em.find(entityClass, id); // Use entityClass here
+        }
+    }
+
+    @Override
     public List<T> getAll() {
         try (var em = emf.createEntityManager()) {
-            return em.createQuery("SELECT e FROM " + this.getClass().getSimpleName() + " e", (Class<T>) this.getClass())
+            return em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass)
                     .getResultList();
         }
     }

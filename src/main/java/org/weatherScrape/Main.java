@@ -27,6 +27,8 @@ public class Main {
 
         forecastDAO.saveAll(forecasts);
 
+        forecastDAO.getById(1);
+
 
 
     }

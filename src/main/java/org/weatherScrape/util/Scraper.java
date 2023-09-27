@@ -62,7 +62,7 @@ public class Scraper {
                         System.out.println("Fetching cities for " + region.getName() + " on thread " + Thread.currentThread().getName());
                         List<City> regionCities = new ArrayList<>();
                         Document doc = fetchData(baseUrl + region.getCountryCode() + "/" + region.getId());
-                        Elements aCities = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a");
+                        Elements aCities = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a:nth-child(1)");
                         for (Element aCity : aCities) {
                             String name = aCity.text();
                             String str = aCity.attr("href");

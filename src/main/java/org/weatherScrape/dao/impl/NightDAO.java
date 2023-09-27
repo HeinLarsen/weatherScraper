@@ -8,6 +8,7 @@ public class NightDAO extends GenericDAO<Night>{
     private static NightDAO instance;
 
     private NightDAO(EntityManagerFactory emf) {
+        super(Night.class);
         super.setEntityManagerFactory(emf);
     }
 

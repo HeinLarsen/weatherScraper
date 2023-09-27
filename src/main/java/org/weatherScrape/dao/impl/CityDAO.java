@@ -9,6 +9,7 @@ public class CityDAO extends GenericDAO<City> implements ICityDAO {
     private static CityDAO instance;
 
     private CityDAO(EntityManagerFactory emf) {
+        super(City.class);
         super.setEntityManagerFactory(emf);
     }
 
