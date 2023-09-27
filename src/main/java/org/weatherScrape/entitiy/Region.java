@@ -10,6 +10,9 @@ import java.util.Set;
 @Getter
 @ToString
 @NoArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "Region.deleteAllRegions", query = "DELETE FROM Region r")
+})
 public class Region {
 
     @Setter(AccessLevel.NONE)
