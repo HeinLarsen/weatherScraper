@@ -8,7 +8,6 @@ import lombok.ToString;
 @MappedSuperclass
 @NoArgsConstructor
 @ToString
-@Getter
 public class WeatherData {
 
     @Id
