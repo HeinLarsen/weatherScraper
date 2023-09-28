@@ -1,6 +1,8 @@
 package org.weatherScrape.dao.impl;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.weatherScrape.DTO.HighestTempDTO;
 import org.weatherScrape.entitiy.Forecast;
 
 public class ForecastDAO extends GenericDAO<Forecast> {
@@ -18,4 +20,8 @@ public class ForecastDAO extends GenericDAO<Forecast> {
         }
         return instance;
     }
+
+
+
+
 }

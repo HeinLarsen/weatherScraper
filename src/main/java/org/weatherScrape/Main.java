@@ -5,7 +5,9 @@ package org.weatherScrape;
 import jakarta.persistence.EntityManagerFactory;
 import org.jsoup.nodes.Document;
 import org.weatherScrape.config.HibernateConfig;
+import org.weatherScrape.dao.impl.DayDAO;
 import org.weatherScrape.dao.impl.ForecastDAO;
+import org.weatherScrape.dao.impl.NightDAO;
 import org.weatherScrape.entitiy.CurrentWeather;
 import org.weatherScrape.entitiy.Forecast;
 import org.weatherScrape.util.Scraper;
@@ -27,6 +29,10 @@ public class Main {
         // get random city from forecasts list
         var randomCity = forecasts.get((int) (Math.random() * forecasts.size())).getCity().getName();
         getCurrentWeather(randomCity);
+
+        NightDAO nightDAO = NightDAO.getInstance(emf);
+        var res = nightDAO.getHighestTemp();
+        System.out.println(res);
 
     }
 
