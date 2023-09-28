@@ -20,13 +20,13 @@ public class Main {
 
         ForecastDAO forecastDAO = ForecastDAO.getInstance(emf);
 
-
         var forecasts = scrape();
 
         forecastDAO.saveAll(forecasts);
 
-        forecastDAO.getById(1);
-
+        // get random city from forecasts list
+        var randomCity = forecasts.get((int) (Math.random() * forecasts.size())).getCity().getName();
+        getCurrentWeather(randomCity);
 
     }
 
@@ -44,14 +44,17 @@ public class Main {
         forecasts.forEach(System.out::println);
 
 
+
+        return forecasts;
+
+    }
+
+    private static void getCurrentWeather(String city) {
         try {
-            CurrentWeather currentWeather = WeatherApiClient.getWeatherDateNow("Copenhagen");
+            CurrentWeather currentWeather = WeatherApiClient.getWeatherDateNow(city);
             System.out.println(currentWeather.toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        return forecasts;
-
-
     }
 }
