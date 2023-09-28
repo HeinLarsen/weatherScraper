@@ -61,6 +61,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(org.weatherScrape.entitiy.Night.class);
         configuration.addAnnotatedClass(org.weatherScrape.entitiy.Region.class);
         configuration.addAnnotatedClass(org.weatherScrape.entitiy.WeatherData.class);
+        configuration.addAnnotatedClass(org.weatherScrape.entitiy.CurrentWeather.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig() {
