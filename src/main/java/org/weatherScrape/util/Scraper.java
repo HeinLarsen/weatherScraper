@@ -33,7 +33,7 @@ public class Scraper {
     public static List<Region> getRegions(Document doc) {
         List<Region> regions = new ArrayList<>();
         // tmp hardcode to Capital Region of Denmark
-        Elements elements = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a:nth-child(1)");
+        Elements elements = doc.select("body > div > div.two-column-page-content > div.page-column-1 > div.page-content.content-module > div.result-container > a");
         Elements country = doc.getElementsByClass("location-title");
 
 
@@ -86,8 +86,8 @@ public class Scraper {
         }
         es.shutdown();
         System.out.println("Total scrape time: " + scrapeTime.get()/1000000 + " milliseconds");
-        // Might be needed because there's two Ågerup on the website?
-        // cities.removeIf(city -> cities.stream().anyMatch(c -> c.getName().equals(city.getName()) && c.getId() != city.getId()));
+        // remove duplicates due to cities existing in multiple regions
+         cities.removeIf(city -> cities.stream().anyMatch(c -> c.getName().equals(city.getName()) && c.getId() != city.getId()));
         return cities;
     }
 
