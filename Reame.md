@@ -7,24 +7,26 @@
 This project is about webscraping and the use of rest API's to collect data from the web. The data we have chosen to collect is from the website [www.accuweather.com](https://www.accuweather.com). We have chosen to collect weather data for all the cities on Sjælland (Denmark)
 
 ## 2. Tech stack
-## - Java - JDK 17
-## - Maven
-## - Jsoup (for webscraping)
-## - Gson (for JSON parsing)
-## - Junit (for testing)
-## - Boomerang (for testing API calls)
-## - Postgresql (for database)
-## - Docker (for containerization)
-## - OpenWeatherMap API (for updating already scraped data)
+- Java - JDK 17
+- Maven
+- Jsoup (for webscraping)
+- Gson (for JSON parsing)
+- Junit (for testing)
+- Boomerang (for testing API calls)
+- Postgresql (for database)
+- Docker (for containerization)
+- OpenWeatherMap API (for updating already scraped data)
 
 ## Page used for scraping:
-## - https://www.accuweather.com/en/browse-locations/eur/dk/84
+### - https://www.accuweather.com/en/browse-locations/eur/dk/84
 
 ## API endpoint used for updating data:
 
-## - https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+### - https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
+## EER Diagram
 
+![EER Diagram](./documentation/EER-Diagram-Final.png)
 
 
 # Project Requirements:
@@ -56,7 +58,6 @@ If you are unsure about finding a website to scrape, you can use the following e
 
 ## Weather Data project
 
-![Rainrabbit](./images/rabbitweather.png)
 
 ### Day 1: Web Scraping and DTOs
 
